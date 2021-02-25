@@ -1,10 +1,7 @@
 class Movie < ActiveRecord::Base
-    def all_ratings
-        @ratings = ['G','PG','PG-13','R']
-        
-        return @ratings
-    end
+    
+    scope :with_ratings, ->(selected_ratings) { where(rating:selected_ratings) }
+    scope :all_ratings, ->{['G','PG','PG-13','R']}
 end
 
-h = Movie.new();
-puts h.all_ratings
+

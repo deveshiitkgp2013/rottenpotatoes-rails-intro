@@ -13,23 +13,30 @@ class MoviesController < ApplicationController
     @ratings_to_show = []
     @movies = Movie.all
     
-    logger.debug("dfsdf")
-    if params.include? :ratings
-      selected_ratings = params[:ratings].keys
-      if !selected_ratings.nil?
-      #@ratings_to_show = 
-        @movies = Movie.with_ratings(selected_ratings)
-      end
+    if !params.include? :sort
+      params[:sort] = session[:sort]
     end
-    if params.include? :sort
-      sort = params[:sort]
-      if 'title' == sort
-          @movies = Movie.order(:title)
+    if !params.include? :ratings
+      params[:ratings] = session[:ratings]
+    end
+     
+    
+    selected_ratings = params[:ratings].keys
+    if !selected_ratings.nil?
+      @movies = Movie.with_ratings(selected_ratings)
+    end
+    
+    
+    sort = params[:sort]
+    if 'title' == sort
+        @movies = Movie.order(:title)
       
-      elsif 'date' == sort
-          @movies = Movie.order(:release_date)
-      end
+    elsif 'date' == sort
+        @movies = Movie.order(:release_date)
     end
+    session[:sort] = params[:sort]
+    session[:ratings] = params[:ratings]
+    @redirect_params = params
   end
 
   def new

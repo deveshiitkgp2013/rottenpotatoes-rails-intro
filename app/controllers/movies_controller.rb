@@ -15,7 +15,12 @@ class MoviesController < ApplicationController
     
     logger.debug(session[:sort])
     
-     
+    if params[:sort].nil?
+      params[:sort] = session[:sort]
+    end
+    if params[:ratings].nil?
+      params[:ratings] = session[:ratings]
+    end 
     if params.include? :ratings
       selected_ratings = params[:ratings].keys
       if !selected_ratings.nil?

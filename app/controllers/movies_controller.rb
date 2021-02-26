@@ -22,8 +22,11 @@ class MoviesController < ApplicationController
     if params[:ratings].nil?
       params[:ratings] = session[:ratings]
     end
+    
      
-    selected_ratings = params[:ratings].keys
+    selected_ratings = []
+    if params.include? :ratings
+      selected_ratings = params[:ratings].keys
     
     if !selected_ratings.nil?
         @movies = Movie.with_ratings(selected_ratings)

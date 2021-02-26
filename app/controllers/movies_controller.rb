@@ -13,13 +13,13 @@ class MoviesController < ApplicationController
     @ratings_to_show = []
     @movies = Movie.all
     
-    logger.debug(session[:sort])
     
-     
+    
+    
     if params.include? :ratings
       selected_ratings = params[:ratings].keys
     else
-     selected_ratings = session[:ratings] 
+     selected_ratings = session[:ratings].keys 
     end
     if !selected_ratings.nil?
         @movies = Movie.with_ratings(selected_ratings)

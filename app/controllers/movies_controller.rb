@@ -21,7 +21,14 @@ class MoviesController < ApplicationController
         @movies = Movie.with_ratings(selected_ratings)
       end
     end
-    
+    if params.include? :sort
+    sort = params[:sort]
+    if 'title' == sort
+       @movies = Movie.order(:title)
+    end
+    elsif 'date' == sort
+       @movies = Movie.order(:release_date)
+    end
   end
 
   def new

@@ -19,7 +19,7 @@ class MoviesController < ApplicationController
     if params.include? :ratings
       selected_ratings = params[:ratings].keys
     else
-     selected_ratings = session[:ratings] 
+     selected_ratings = session[:ratings].keys 
     end
     if !selected_ratings.nil?
         @movies = Movie.with_ratings(selected_ratings)
@@ -30,6 +30,7 @@ class MoviesController < ApplicationController
     else
       sort = session[:sort]
     end
+    
     if 'title' == sort
       if !selected_ratings.nil?
         @movies = Movie.order_and_ratings(selected_ratings,:title)

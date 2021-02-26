@@ -1,6 +1,5 @@
 class MoviesController < ApplicationController
-  @all_ratings = Movie.all_ratings
-  @ratings_to_show = []
+  
 
  
   def show
@@ -11,6 +10,8 @@ class MoviesController < ApplicationController
 
   def index
     @movies = Movie.all
+    @all_ratings = Movie.all_ratings
+    @ratings_to_show = []
     logger.debug("dfsdf")
     if params.include? :ratings
       selected_ratings = params[:ratings].keys

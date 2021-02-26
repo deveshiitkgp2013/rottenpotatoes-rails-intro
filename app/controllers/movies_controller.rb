@@ -1,7 +1,10 @@
 class MoviesController < ApplicationController
-  
+  @all_ratings = Movie.all_ratings
+  @ratings_to_show = []
 
- 
+  attr_accessor :all_ratings
+  attr_accessor :ratings_to_show
+
   def show
     id = params[:id] # retrieve movie ID from URI route
     @movie = Movie.find(id) # look up movie by unique ID
@@ -10,8 +13,7 @@ class MoviesController < ApplicationController
 
   def index
     @movies = Movie.all
-    @all_ratings = Movie.all_ratings
-    @ratings_to_show = []
+    
     logger.debug("dfsdf")
     if params.include? :ratings
       selected_ratings = params[:ratings].keys

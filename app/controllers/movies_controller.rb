@@ -16,18 +16,11 @@ class MoviesController < ApplicationController
     logger.debug(session[:sort])
     
      
-    if params[:sort].nil?
-      params[:sort] = session[:sort]
-    end
-    if params[:ratings].nil?
-      params[:ratings] = session[:ratings]
-    end
-    
-     
-    selected_ratings = []
     if params.include? :ratings
       selected_ratings = params[:ratings].keys
-    
+    else
+     selected_ratings = session[:rating] 
+    end
     if !selected_ratings.nil?
         @movies = Movie.with_ratings(selected_ratings)
     end
@@ -37,7 +30,6 @@ class MoviesController < ApplicationController
     else
       sort = session[:sort]
     end
-    
     if 'title' == sort
       if !selected_ratings.nil?
         @movies = Movie.order_and_ratings(selected_ratings,:title)

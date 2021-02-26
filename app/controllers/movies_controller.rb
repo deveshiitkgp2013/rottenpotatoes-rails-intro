@@ -13,7 +13,7 @@ class MoviesController < ApplicationController
     @ratings_to_show = []
     @movies = Movie.all
     
-    logger.debug(session[:sort])
+    logger.debug("sasdasddasd1312312312312312?????????????asdasdasdasd"+session[:sort])
     
      
     if params.include? :ratings

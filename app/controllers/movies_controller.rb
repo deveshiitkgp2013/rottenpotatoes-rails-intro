@@ -14,7 +14,7 @@ class MoviesController < ApplicationController
     @ratings_to_show = []
     if session.include? :ratings
         @ratings_to_show = session[:ratings].keys
-      en
+    end
     @movies = Movie.all
     
      

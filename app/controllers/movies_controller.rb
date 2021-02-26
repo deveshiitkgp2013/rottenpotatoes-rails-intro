@@ -13,6 +13,12 @@ class MoviesController < ApplicationController
     @ratings_to_show = []
     @movies = Movie.all
     
+    if params[:sort].nil?
+      params[:sort] = session[:sort]
+    end
+    if params[:ratings].nil?
+      params[:ratings] = session[:ratings]
+    end
      
     if params.include? :ratings
       selected_ratings = params[:ratings].keys

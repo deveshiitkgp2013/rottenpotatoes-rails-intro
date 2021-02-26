@@ -13,12 +13,6 @@ class MoviesController < ApplicationController
     @ratings_to_show = []
     @movies = Movie.all
     
-    if !params.include? :sort
-      params[:sort] = session[:sort]
-    end
-    if !params.include? :ratings
-      params[:ratings] = session[:ratings]
-    end
      
     if params.include? :ratings
       selected_ratings = params[:ratings].keys
@@ -29,10 +23,10 @@ class MoviesController < ApplicationController
     if params.include? :sort
       sort = params[:sort]
       if 'title' == sort
-          @movies = Movie.order(:title)
+        @movies = Movie.order(:title)
       
       elsif 'date' == sort
-          @movies = Movie.order(:release_date)
+        @movies = Movie.order(:release_date)
       end
     end
   end

@@ -1,5 +1,5 @@
 class MoviesController < ApplicationController
-  
+  @ratings_to_show = []
 
 
   def show
@@ -10,7 +10,7 @@ class MoviesController < ApplicationController
 
   def index
     @all_ratings = Movie.all_ratings
-    @ratings_to_show = []
+    
     @movies = Movie.all
     
     

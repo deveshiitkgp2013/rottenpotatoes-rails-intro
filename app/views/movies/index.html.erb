@@ -19,7 +19,7 @@
   <thead>
     <tr>
       
-     <th class = "<%params[:sort] == 'title' ? 'hilite' : 'hilite1'%>"><%= link_to "Movie Title", movies_path({:sort => "title"}), :id => 'title_header' %></th>      
+     <th class = <%"params[:sort] == 'title' ? 'hilite' : 'hilite1'"%>><%= link_to "Movie Title", movies_path({:sort => "title"}), :id => 'title_header' %></th>      
      
      <th>Rating</th>
      <th class="text-primary">Release Date</th>

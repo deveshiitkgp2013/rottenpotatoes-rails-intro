@@ -22,12 +22,13 @@ class MoviesController < ApplicationController
       end
     end
     if params.include? :sort
-    sort = params[:sort]
-    if 'title' == sort
-       @movies = Movie.order(:title)
-    end
-    elsif 'date' == sort
-       @movies = Movie.order(:release_date)
+      sort = params[:sort]
+      if 'title' == sort
+          @movies = Movie.order(:title)
+      
+      elsif 'date' == sort
+          @movies = Movie.order(:release_date)
+      end
     end
   end
 

@@ -13,9 +13,6 @@ class MoviesController < ApplicationController
     
     @movies = Movie.all
     
-    
-    
-    
     if params.include? :ratings
       selected_ratings = params[:ratings].keys
     else

@@ -1,5 +1,7 @@
 class MoviesController < ApplicationController
-  
+  @all_ratings = Movie.all_ratings
+  @ratings_to_show = []
+
  
   def show
     id = params[:id] # retrieve movie ID from URI route

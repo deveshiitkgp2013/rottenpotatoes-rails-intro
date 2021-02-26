@@ -10,11 +10,14 @@ class MoviesController < ApplicationController
   end
 
   def index
-   
-    
     @movies = Movie.all
-    
-    
+    if params.include? :ratings
+      selected_ratings = params[:ratings].keys
+      if !selected_ratings.nil?
+      #@ratings_to_show = 
+        @movies = Movie.with_ratings(selected_ratings)
+      end
+    end
     
   end
 

@@ -21,22 +21,28 @@ class MoviesController < ApplicationController
     end
      
     
-    selected_ratings = params[:ratings].keys
-    if !selected_ratings.nil?
-      @movies = Movie.with_ratings(selected_ratings)
+    if params.include? :ratings
+      selected_ratings = params[:ratings].keys
+      if !selected_ratings.nil?
+        @movies = Movie.with_ratings(selected_ratings)
+      end
     end
     
+    if !params.include? :sort
+      sort = params[:sort]
+    else
+      sort =""
+    end
     
-    sort = params[:sort]
     if 'title' == sort
       if !rating_param.nil?
-        @movies = Movie.order_and_ratings(:selected_ratings,:title)
+        @movies = Movie.order_and_ratings(selected_ratings,:title)
       else
         @movies = Movie.order(:title)
       end
     elsif 'date' == sort
       if !rating_param.nil?
-        @movies = Movie.order_and_ratings(:selected_ratings,:release_date)
+        @movies = Movie.order_and_ratings(selected_ratings,:release_date)
       else
         @movies = Movie.order(:release_date)
       end

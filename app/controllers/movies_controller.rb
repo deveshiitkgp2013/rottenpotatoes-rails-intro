@@ -31,13 +31,13 @@ class MoviesController < ApplicationController
       sort = session[:sort]
     end
     if 'title' == sort
-      if !rating_param.nil?
+      if !selected_ratings.nil?
         @movies = Movie.order_and_ratings(selected_ratings,:title)
       else
         @movies = Movie.order(:title)
       end
     elsif 'date' == sort
-      if !rating_param.nil?
+      if !selected_ratings.nil?
         @movies = Movie.order_and_ratings(selected_ratings,:release_date)
       else
         @movies = Movie.order(:release_date)

@@ -11,6 +11,7 @@ class MoviesController < ApplicationController
 
   def index
     @movies = Movie.all
+    logger.debug("dfsdf")
     if params.include? :ratings
       selected_ratings = params[:ratings].keys
       if !selected_ratings.nil?

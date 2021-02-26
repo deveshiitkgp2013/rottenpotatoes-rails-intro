@@ -10,7 +10,11 @@ class MoviesController < ApplicationController
 
   def index
     @all_ratings = Movie.all_ratings
-    @ratings_to_show = session[:ratings].keys
+    
+    @ratings_to_show = []
+    if session.include? :ratings
+        @ratings_to_show = session[:ratings].keys
+      en
     @movies = Movie.all
     
      
@@ -18,7 +22,9 @@ class MoviesController < ApplicationController
       params[:sort] = session[:sort]
     end
     if params[:ratings].nil?
-      params[:ratings] = session[:ratings]
+      if session.include? :ratings
+        params[:ratings] = session[:ratings]
+      end
     end
     
     if params.include? :ratings

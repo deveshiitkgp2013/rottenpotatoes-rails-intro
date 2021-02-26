@@ -27,13 +27,16 @@ class MoviesController < ApplicationController
     
     if params.include? :sort
       sort = params[:sort]
-      if 'title' == sort
-        @movies = Movie.order(:title)
-      
-      elsif 'date' == sort
-        @movies = Movie.order(:release_date)
-      end
+    else
+      sort = session[:sort]
     end
+    if 'title' == sort
+      @movies = Movie.order(:title)
+      
+    elsif 'date' == sort
+      @movies = Movie.order(:release_date)
+    end
+    
     session[:sort] = params[:sort]
     session[:ratings] = params[:ratings]
     @redirect_params = params

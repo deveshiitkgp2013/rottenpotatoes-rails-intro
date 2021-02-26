@@ -13,6 +13,7 @@ class MoviesController < ApplicationController
     @ratings_to_show = []
     @movies = Movie.all
     
+    logger.debug(session[:sort])
     
      
     if params.include? :ratings
@@ -30,6 +31,9 @@ class MoviesController < ApplicationController
         @movies = Movie.order(:release_date)
       end
     end
+    session[:sort] = params[:sort]
+    session[:ratings] = params[:ratings]
+    @redirect_params = params
   end
 
   def new

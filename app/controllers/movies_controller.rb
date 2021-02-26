@@ -1,5 +1,5 @@
 class MoviesController < ApplicationController
-  @ratings_to_show = []
+  
 
 
   def show
@@ -14,7 +14,7 @@ class MoviesController < ApplicationController
     @movies = Movie.all
     
     
-    
+    @ratings_to_show = []
     
     if params.include? :ratings
       selected_ratings = params[:ratings].keys
@@ -24,7 +24,7 @@ class MoviesController < ApplicationController
     if !selected_ratings.nil?
         @movies = Movie.with_ratings(selected_ratings)
     end
-    
+    @ratings_to_show = selected_ratings
     if params.include? :sort
       sort = params[:sort]
     else

@@ -36,13 +36,13 @@ class MoviesController < ApplicationController
     
     if 'title' == sort
       if !rating_param.nil?
-        @movies = Movie.order_and_ratings(selected_ratings,:title)
+        @movies = Movie.order(:title)
       else
         @movies = Movie.order(:title)
       end
     elsif 'date' == sort
       if !rating_param.nil?
-        @movies = Movie.order_and_ratings(selected_ratings,:release_date)
+        @movies = Movie.order(:release_date)
       else
         @movies = Movie.order(:release_date)
       end

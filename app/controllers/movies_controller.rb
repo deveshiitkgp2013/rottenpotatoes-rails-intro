@@ -1,5 +1,5 @@
 class MoviesController < ApplicationController
-   @ratings_to_show = []
+   
 
 
   def show
@@ -10,7 +10,7 @@ class MoviesController < ApplicationController
 
   def index
     @all_ratings = Movie.all_ratings
-    
+    @ratings_to_show = []
     @movies = Movie.all
     
     logger.debug(session[:sort])
@@ -20,7 +20,7 @@ class MoviesController < ApplicationController
       selected_ratings = params[:ratings].keys
     else
      selected_ratings = session[:ratings].keys
-     @ratings_to_show = selected_ratings
+     
     end
     if !selected_ratings.nil?
         @movies = Movie.with_ratings(selected_ratings)

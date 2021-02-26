@@ -13,10 +13,10 @@ class MoviesController < ApplicationController
     @ratings_to_show = []
     @movies = Movie.all
     
-    if !params.include? :sort
+    if params[:sort].nil?
       params[:sort] = session[:sort]
     end
-    if !params.include? :ratings
+    if params[:ratings].nil?
       params[:ratings] = session[:ratings]
     end
      
@@ -29,14 +29,20 @@ class MoviesController < ApplicationController
     
     sort = params[:sort]
     if 'title' == sort
+      if !rating_param.nil?
+        @movies = Movie.order_and_ratings(:selected_ratings,:title)
+      else
         @movies = Movie.order(:title)
-      
+      end
     elsif 'date' == sort
+      if !rating_param.nil?
+        @movies = Movie.order_and_ratings(:selected_ratings,:release_date)
+      else
         @movies = Movie.order(:release_date)
+      end
     end
     session[:sort] = params[:sort]
     session[:ratings] = params[:ratings]
-    @redirect_params = params
   end
 
   def new
